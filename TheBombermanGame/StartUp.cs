@@ -12,7 +12,7 @@ namespace TheBombermanGame
 
             int rows = int.Parse(userInput[0]);
             int cols = int.Parse(userInput[1]);
-            int seconds = int.Parse(userInput[2]);
+            int second = int.Parse(userInput[2]);
             char[][] grid = new char[rows][];
 
             try
@@ -24,7 +24,7 @@ namespace TheBombermanGame
                 Console.WriteLine(exception.Message);
             }
 
-            Solution solution = new(seconds, grid);
+            Solution solution = new(second, grid);
             solution.Predict();
         }
 

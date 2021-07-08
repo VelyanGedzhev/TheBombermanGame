@@ -6,31 +6,31 @@ namespace TheBombermanGame
 {
     class Solution
     {
-        private readonly int seconds;
+        private readonly int second;
         private readonly char[][] grid;
 
-        public Solution(int seconds, char[][] grid)
+        public Solution(int second, char[][] grid)
         {
-            this.seconds = seconds;
+            this.second = second;
             this.grid = grid;
         }
 
         public void Predict()
         {
             //Return the inital grid, because in the first second Bomberman is standing still
-            if (seconds == 1)
+            if (second == 1)
             {
                 PrepareGrid(grid);
-                Console.WriteLine(PrintGrid(grid, seconds));
+                PrintGrid(grid, second);
                 return;
             }
 
             //On even seconds the grid is completely filled with bombs
-            if (seconds % 2 == 0)
+            if (second % 2 == 0)
             {
                 PlantBombs(grid);
                 PrepareGrid(grid);
-                Console.WriteLine(PrintGrid(grid, seconds));
+                PrintGrid(grid, second);
                 return;
             }
 
@@ -85,14 +85,14 @@ namespace TheBombermanGame
             PlantBombs(grid);
             DefuseBombs(grid);
 
-            if ((seconds - 5) % 4 == 0)
+            if ((second - 5) % 4 == 0)
             {
                 PlantBombs(grid);
                 DefuseBombs(grid);
             }
 
             PrepareGrid(grid);
-            Console.WriteLine(PrintGrid(grid, seconds));
+            PrintGrid(grid, second);
         }
 
         //New bombs are planted on free cells and the ones on the grid lose 1sec from their fuse
@@ -130,7 +130,7 @@ namespace TheBombermanGame
             }
         }
 
-        private static string PrintGrid(char[][] grid, int seconds)
+        private static void PrintGrid(char[][] grid, int seconds)
         {
             var secondsText = seconds == 1 ? "second" : "seconds";
 
@@ -144,7 +144,7 @@ namespace TheBombermanGame
                 result.AppendLine(string.Join("", grid[row]));
             }
 
-            return result.ToString();
+            Console.WriteLine(result.ToString());
         }
 
         //Checks if the needed cell is in the grid
