@@ -17,7 +17,5 @@
         public const char TwoSecondToBlowBomb = '2';
         public const char ThreeSecondsToBlowBomb = '3';
         public const char FreeSpaceSymbol = '.';
-
-        public const string ResultFilePath = "Result.txt";
     }
 }
