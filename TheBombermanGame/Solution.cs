@@ -18,7 +18,7 @@ namespace TheBombermanGame
         public void Predict()
         {
             //Return the inital grid, because in the first second Bomberman is standing still
-            if (seconds <= 1)
+            if (seconds == 1)
             {
                 PrepareGrid(grid);
                 Console.WriteLine(PrintGrid(grid, seconds));
@@ -133,7 +133,6 @@ namespace TheBombermanGame
         private static string PrintGrid(char[][] grid, int seconds)
         {
             var secondsText = seconds == 1 ? "second" : "seconds";
-
 
             var result = new StringBuilder();
             result
