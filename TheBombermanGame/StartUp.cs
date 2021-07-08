@@ -72,7 +72,7 @@ namespace TheBombermanGame
 
         //Checks if a row from the grid is longer than the length provided by the user
         private static bool IsRowLengthInvalid(int cols, char[] currentRow)
-            => currentRow.Length < 0 || currentRow.Length > cols;
+            => currentRow.Length != cols;
 
         //Checks if the rows, columns and second provided by the user are in correct format '0 0 0'
         private static bool ValidateInitialConfiguration(string[] userInput)
