@@ -76,7 +76,7 @@ namespace TheBombermanGame
 
         //Checks if the rows, columns and second provided by the user are in correct format '0 0 0'
         private static bool ValidateInitialConfiguration(string[] userInput)
-            => userInput.Length == 3 && userInput.All(x => int.TryParse(x, out _));
+            => userInput.Length == 3 && userInput.All(x => int.TryParse(x, out int result) && result >= 1);
     }
 }
 

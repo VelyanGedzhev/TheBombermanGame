@@ -18,10 +18,10 @@ namespace TheBombermanGame
         public void Predict()
         {
             //Return the inital grid, because in the first second Bomberman is standing still
-            if (seconds == 1)
+            if (seconds <= 1)
             {
                 PrepareGrid(grid);
-                Console.WriteLine(PrintGrid(grid));
+                Console.WriteLine(PrintGrid(grid, seconds));
                 return;
             }
 
@@ -30,7 +30,7 @@ namespace TheBombermanGame
             {
                 PlantBombs(grid);
                 PrepareGrid(grid);
-                Console.WriteLine(PrintGrid(grid));
+                Console.WriteLine(PrintGrid(grid, seconds));
                 return;
             }
 
@@ -92,7 +92,7 @@ namespace TheBombermanGame
             }
 
             PrepareGrid(grid);
-            Console.WriteLine(PrintGrid(grid));
+            Console.WriteLine(PrintGrid(grid, seconds));
         }
 
         //New bombs are planted on free cells and the ones on the grid lose 1sec from their fuse
@@ -130,10 +130,15 @@ namespace TheBombermanGame
             }
         }
 
-        private static string PrintGrid(char[][] grid)
+        private static string PrintGrid(char[][] grid, int seconds)
         {
+            var secondsText = seconds == 1 ? "second" : "seconds";
+
+
             var result = new StringBuilder();
-            result.AppendLine();
+            result
+                .AppendLine()
+                .AppendLine($"Grid state at '{seconds}' {secondsText}:");
 
             for (int row = 0; row < grid.Length; row++)
             {

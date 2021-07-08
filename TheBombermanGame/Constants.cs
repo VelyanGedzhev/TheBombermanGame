@@ -10,7 +10,7 @@
 
         public const string InitialConfigurationMessage = "Please enter rows, columns and second. The input format is a single line with a single space between each value.";
         public const string InitialGridMessage = "Please enter your initial grid, which must comply with the chosen rows and columns count.";
-        public const string InvalidUserInput = "Invalid game arguments. You should provide number of rows, columns and second in the following format - 'r c s'. Only integer numbers are allowed.";
+        public const string InvalidUserInput = "Invalid game arguments. You should provide number of rows, columns and second in the following format - 'r c s'. Only positive integer numbers are allowed.";
 
         public const char BombSymbol = 'O';
         public const char OneSecondToBlowBomb = '1';
