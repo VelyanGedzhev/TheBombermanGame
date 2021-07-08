@@ -18,6 +18,6 @@
         public const char ThreeSecondsToBlowBomb = '3';
         public const char FreeSpaceSymbol = '.';
 
-        public const string ResultFilePath = "../../../Result.txt";
+        public const string ResultFilePath = "Result.txt";
     }
 }

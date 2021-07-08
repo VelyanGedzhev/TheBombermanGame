@@ -59,7 +59,7 @@ namespace TheBombermanGame
             {
                 var currentRow = Console.ReadLine().Replace(BombSymbol, TwoSecondToBlowBomb).ToCharArray();
 
-                if (ValidateGridRow(cols, currentRow))
+                if (IsRowLengthInvalid(cols, currentRow))
                 {
                     throw new ArgumentOutOfRangeException($"{nameof(currentRow)} size invalid! It must be exactly {cols} long.");
                 }
@@ -70,9 +70,11 @@ namespace TheBombermanGame
             return grid;
         }
 
-        private static bool ValidateGridRow(int cols, char[] currentRow)
+        //Checks if a row from the grid is longer than the length provided by the user
+        private static bool IsRowLengthInvalid(int cols, char[] currentRow)
             => currentRow.Length < 0 || currentRow.Length > cols;
 
+        //Checks if the rows, columns and second provided by the user are in correct format '0 0 0'
         private static bool ValidateInitialConfiguration(string[] userInput)
             => userInput.Length == 3 && userInput.All(x => int.TryParse(x, out _));
     }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Text;
-using System.Threading;
 using static TheBombermanGame.Constants;
 
 namespace TheBombermanGame
@@ -35,11 +33,9 @@ namespace TheBombermanGame
                 Console.WriteLine(PrintGrid(grid));
                 return;
             }
-            //Simulate all cycles up to a given second and gives the grid state at every cycle
-            SimulateAllCyclesUpToGivenSecond();
 
             //Gives only the final state of the grid at the given second without performing all cycles
-            //GetGridStateAtGivenSecond();
+            GetGridStateAtGivenSecond();
         }
 
         //Blow up the bombs in [row +-1, col] and [row, col +-1] of the currently detonated bomb
@@ -161,44 +157,6 @@ namespace TheBombermanGame
             }
 
             return true;
-        }
-
-        private void SimulateAllCyclesUpToGivenSecond()
-        {
-            File.WriteAllText(ResultFilePath, $"Initial grid:");
-            File.AppendAllText(ResultFilePath, PrintGrid(grid));
-
-            for (int s = 2; s <= seconds; s++)
-            {
-                Console.WriteLine();
-
-                if (s % 2 == 0)
-                {
-                    PlantBombs(grid);
-
-                    Console.Write($"Grid at {s} seconds:");
-                    Console.WriteLine(PrintGrid(grid));
-                    File.AppendAllText(ResultFilePath, $"{Environment.NewLine}Grid at {s} seconds:");
-                    File.AppendAllText(ResultFilePath, PrintGrid(grid));
-                }
-                else
-                {
-                    DefuseBombs(grid);
-                    Console.Write($"Grid at {s} seconds:");
-                    Console.WriteLine(PrintGrid(grid));
-                    File.AppendAllText(ResultFilePath, $"{Environment.NewLine}Grid at {s} seconds:");
-                    File.AppendAllText(ResultFilePath, PrintGrid(grid));
-                }
-
-                Thread.Sleep(TimeSpan.FromSeconds(1));
-            }
-
-            PrepareGrid(grid);
-            Console.WriteLine();
-            Console.Write($"Final grid at {seconds} seconds:");
-            Console.WriteLine(PrintGrid(grid));
-            File.AppendAllText(ResultFilePath, $"{Environment.NewLine}Final grid at {seconds} seconds:");
-            File.AppendAllText(ResultFilePath, PrintGrid(grid));
         }
     }
 }
