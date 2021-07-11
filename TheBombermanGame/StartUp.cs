@@ -4,7 +4,7 @@ using static TheBombermanGame.Constants;
 
 namespace TheBombermanGame
 {
-    class StartUp
+    public class StartUp
     {
         public static void Main(string[] args)
         {

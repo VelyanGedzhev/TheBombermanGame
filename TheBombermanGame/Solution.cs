@@ -4,7 +4,7 @@ using static TheBombermanGame.Constants;
 
 namespace TheBombermanGame
 {
-    class Solution
+    public class Solution
     {
         private readonly int second;
         private readonly char[][] grid;

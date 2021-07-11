@@ -20,7 +20,8 @@
         public const char ThreeSecondsToBlowBomb = '3';
         public const char FreeSpaceSymbol = '.';
 
-        public const int NeighbouringCellIndex = 1;
+        public const int NeighbouringCellIndex = 1; 
+        public const int ZeroIndex = 0;
 
         public const int OneSecond = 1;
         public const int TwoSeconds = 2;
@@ -30,7 +31,5 @@
         public const string MultipleSeconds = "seconds";
 
         public const int ZeroRemainder = 0;
-
-        public const int ZeroIndex = 0;
     }
 }
