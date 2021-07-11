@@ -18,7 +18,7 @@ namespace TheBombermanGame
         public void Predict()
         {
             //Return the inital grid, because in the first second Bomberman is standing still
-            if (second == 1)
+            if (second == OneSecond)
             {
                 PrepareGrid(grid);
                 PrintGrid(grid, second);
@@ -26,7 +26,7 @@ namespace TheBombermanGame
             }
 
             //On even seconds the grid is completely filled with bombs
-            if (second % 2 == 0)
+            if (second % TwoSeconds == ZeroRemainder)
             {
                 PlantBombs(grid);
                 PrepareGrid(grid);
@@ -41,10 +41,10 @@ namespace TheBombermanGame
         //Blow up the bombs in [row +-1, col] and [row, col +-1] of the currently detonated bomb
         private static void BlowBombs(char[][] grid, int row, int col)
         {
-            BlowCell(grid, row + 1, col);
-            BlowCell(grid, row - 1, col);
-            BlowCell(grid, row, col + 1);
-            BlowCell(grid, row, col - 1);
+            BlowCell(grid, row + NeighbouringCellIndex, col);
+            BlowCell(grid, row - NeighbouringCellIndex, col);
+            BlowCell(grid, row, col + NeighbouringCellIndex);
+            BlowCell(grid, row, col - NeighbouringCellIndex);
             grid[row][col] = FreeSpaceSymbol;
         }
 
@@ -82,10 +82,12 @@ namespace TheBombermanGame
 
         private void GetGridStateAtGivenSecond()
         {
+            //returns the grid state for seconds in 'pattern3' - 3s, 7s, 11s and etc
             PlantBombs(grid);
             DefuseBombs(grid);
 
-            if ((second - 5) % 4 == 0)
+            //returns the grid state for seconds in 'pattern5' - 5s, 9s, 13s and etc
+            if ((second - FifthSecond) % FourSeconds == ZeroRemainder)
             {
                 PlantBombs(grid);
                 DefuseBombs(grid);
@@ -95,20 +97,21 @@ namespace TheBombermanGame
             PrintGrid(grid, second);
         }
 
-        //New bombs are planted on free cells and the ones on the grid lose 1sec from their fuse
+        //New bombs with 3sec fuse are planted on free cells and the ones on the grid lose 1sec from their fuse
         private static void PlantBombs(char[][] grid)
         {
             for (int row = 0; row < grid.Length; row++)
             {
                 for (int col = 0; col < grid[row].Length; col++)
                 {
-
                     if (char.IsDigit(grid[row][col]))
                     {
+                        //decrease fuse by 1sec
                         grid[row][col]--;
                     }
                     else
                     {
+                        //plant new bomb
                         grid[row][col] = ThreeSecondsToBlowBomb;
                     }
                 }
@@ -132,7 +135,7 @@ namespace TheBombermanGame
 
         private static void PrintGrid(char[][] grid, int seconds)
         {
-            var secondsText = seconds == 1 ? "second" : "seconds";
+            var secondsText = seconds == OneSecond ? SingleSecondText : MultipleSeconds;
 
             var result = new StringBuilder();
             result
@@ -150,12 +153,12 @@ namespace TheBombermanGame
         //Checks if the needed cell is in the grid
         private static bool IsValidCell(char[][] grid, int row, int col)
         {
-            if (row < 0 || row >= grid.Length)
+            if (row < ZeroIndex || row >= grid.Length)
             {
                 return false;
             }
 
-            if (col < 0 || col >= grid[row].Length)
+            if (col < ZeroIndex || col >= grid[row].Length)
             {
                 return false;
             }
